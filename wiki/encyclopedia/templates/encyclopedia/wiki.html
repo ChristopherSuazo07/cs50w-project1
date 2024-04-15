@@ -1,0 +1,29 @@
+{% extends "encyclopedia/layout.html" %}
+
+
+{% block title %}
+    {{ title }}
+    
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    <div class="mt-5">
+            {{ contenido|safe }}
+            
+    </div>
+
+    
+    <div >
+        <a href="/edit/{{ title }}"><div class="btn btn-outline-primary mt-4">Edit this page</div></a> 
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="title" value="{{ title }}">
+            <input class="btn btn-outline-primary mt-4" type="submit" value="Delete this entry">
+        </form>
+    </div>
+{% endblock %}

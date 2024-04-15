@@ -1,0 +1,39 @@
+{% extends "encyclopedia/layout.html" %}
+
+
+{% block title %}
+    Editing {{ title }}
+    
+
+{% endblock %}
+
+
+{% block body %}
+
+    <div >
+            {{ contenido|safe }}       
+    </div>
+    
+    <form action="/edit/{{ title }}" method='post'>
+
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">File Name:</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="new_title" value="{{ title }}" readonly>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Markdown Content:</label>
+          <textarea class="form-control myTextarea" id="exampleInputPassword1"  oninput="autoResize()"style = "field-sizing: content;" name="new_content">{{ content }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">New Page</button>
+      </form>
+
+      <style>
+        .myTextarea{
+          resize: none; 
+          overflow: hidden; 
+          height: auto; 
+          min-height: 50px; 
+        }
+      </style>
+{% endblock %}

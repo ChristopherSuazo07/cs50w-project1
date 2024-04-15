@@ -1,0 +1,33 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5 mb-5">Create A New Page</h1>
+
+    <form action="{% url 'new' %}" method='post'>
+
+        {% csrf_token %}
+        <div class="mb-3 mx-5">
+          <label for="exampleInputEmail1" class="form-label">File Name:</label>
+          <input type="text" class="form-control"  id= "exampleInputEmail1" aria-describedby="emailHelp" name="new_title"  autocomplete="off" style="width: 80% ">
+        </div>
+        <div class="mb-3 mx-5">
+          <label for="exampleInputPassword1" class="form-label">Markdown Content:</label>
+          <textarea class="form-control" id="exampleInputPassword1" style ="field-sizing: content; width: 80% " name="new_content"></textarea>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">Create New Page</button>
+        </div>
+      </form>
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+   
+{% endblock %}
